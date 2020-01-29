@@ -4,10 +4,13 @@ import {
   Text,
 } from 'react-native';
 
+
+import Router from "./routes";
+
 const App: () => React$Node = () => {
   return (
     <>
-    <Text>Inicial</Text>
+    <Router />
     </>
   );
 };
