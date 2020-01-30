@@ -9,7 +9,7 @@ import AuthLoadingScreen from "../pages/LoadingScreen";
 // goes here.
 
 const AppStack = createStackNavigator({ Home: HomeScreen });
-const AuthStack = createStackNavigator({ SignIn: SignInScreen });
+const AuthStack = createSwitchNavigator({ SignIn: SignInScreen });
 const inicialStack = createSwitchNavigator(
     { 
         AuthLoadingScreen: AuthLoadingScreen,
