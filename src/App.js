@@ -1,17 +1,19 @@
 
 import React from 'react';
-import {
-  Text,
-} from 'react-native';
+import { Provider as PaperProvider } from 'react-native-paper';
+
+import paperTheme from "./styles/paperTheme"
+
+
 
 
 import Router from "./routes";
 
 const App: () => React$Node = () => {
   return (
-    <>
-    <Router />
-    </>
+    <PaperProvider theme={paperTheme}>
+      <Router />
+    </PaperProvider>
   );
 };
 
