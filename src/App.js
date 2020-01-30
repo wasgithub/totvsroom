@@ -6,7 +6,7 @@ import { createStore } from 'redux'
 import rootReducer from './store/reducers'
 
 import Router from "./routes";
-import paperTheme from "./styles/paperTheme"
+import { paperTheme } from "./styles"
 
 const store = createStore(rootReducer)
 

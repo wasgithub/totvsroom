@@ -1,6 +1,6 @@
 import React from "react";
 import { View, Button, Text } from "react-native";
-// import AsyncStorage from '@react-native-community/async-storage';
+import AsyncStorage from '@react-native-community/async-storage';
 
 
 class HomeScreen extends React.Component {
@@ -12,7 +12,7 @@ class HomeScreen extends React.Component {
 
     getData = async () => {
       try {
-        // const value = await AsyncStorage.getItem('login')
+        const value = await AsyncStorage.getItem('login')
         this.setState({storage: value})
         if(value !== null) {
           // value previously stored
