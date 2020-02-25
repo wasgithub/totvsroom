@@ -18,22 +18,18 @@ import Logo from "../../components/Logo";
 const CriarConta = (props) => {
 
   const [isLoading, setIsloading] = useState(false)
+  const [errorMsg, setErrorMsg] = useState("")
 
   const loginState = useSelector(state => state.autenticacaoReducer)
   const dispatch = useDispatch();
 
   const _cadastraUsuario = async() => {
-    try {
       setIsloading(true)
       const { nome, email, senha } = loginState;
       await firebase.auth().createUserWithEmailAndPassword(email, senha)
       .then((user) => console.tron.log("user",user))
-      .catch((error) => console.tron.log("eror",error))
-    } catch (error) {
-      console.tron.log("error", error)
-    } finally {
-      setIsloading(false)
-    }
+      .catch((error) => setErrorMsg(error.message))
+      .finally(() => setIsloading(false))
 
     // cadastraUsuario({ nome, email, senha });
     // props.navigation.navigate('App');
@@ -69,7 +65,7 @@ const CriarConta = (props) => {
           mode={"outlined"}
           style={styles.field}
           />
-          <Text>{loginState.erroCadastro}</Text>       
+          <Text>{errorMsg}</Text>       
         <Button 
           mode="contained"
           loading={false}
