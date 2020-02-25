@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import  WasButton  from 'was-button';
 import { View, StyleSheet, Text, TouchableHighlight } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 import colors from "../../styles/colors"

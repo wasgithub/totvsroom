@@ -1,7 +1,8 @@
 const INITIAL_STATE = {
   nome: "was",
   email: "washington@totvs.com.br",
-  senha: ""
+  senha: "",
+  erroCadastro: "erro cadastro"
 }
 
 const autenticacaoReducer = (state = INITIAL_STATE, action) => {
@@ -18,6 +19,10 @@ const autenticacaoReducer = (state = INITIAL_STATE, action) => {
       case 'MODIFICA_NOME':
         return {
           ...state, nome: action.payload,
+        }
+      case 'CADASTRA_USUARIO_ERRO':
+        return {
+          ...state, erroCadastro: action.payload
         }
         
       default:

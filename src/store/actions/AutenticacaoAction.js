@@ -23,17 +23,17 @@ export const modificaNome = text => {
 }
 
 export const cadastraUsuario = ({ nome, email, senha }) => {
-    console.log(email)
-    return dispatch => {
+    // return dispatch => {
+        console.tron.log("email",email)
         firebase.auth().createUserWithEmailAndPassword(email, senha)
-            .then((user) => cadastraUsuarioSucesso(user, dispatch))
-            .catch((error) => cadastraUsuarioErro(error, dispatch))
-    }
+            .then((user) => cadastraUsuarioSucesso(user))
+            .catch((error) => cadastraUsuarioErro(error))
+    // }
 }
 
 const cadastraUsuarioSucesso = (user, dispatch) => {
-    console.log("_cadastrar sucesso")
-    dispatch ({
+    console.tron.log("_cadastrar sucesso")
+    return ({
         type: "CADASTRA_USUARIO_SUCESSO",
         payload: user
     })
@@ -41,10 +41,10 @@ const cadastraUsuarioSucesso = (user, dispatch) => {
 }
 
 const cadastraUsuarioErro = (error, dispatch) => {
-    console.log("_cadastrar erro")
-    dispatch ({
+    console.tron.log("_cadastrar erro")
+    return ({
         type: "CADASTRA_USUARIO_ERRO",
-        payload: error
+        payload: error.message
     })
 
 }

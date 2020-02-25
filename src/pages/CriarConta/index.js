@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { View, StyleSheet, Text, TouchableHighlight } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
+import firebase from "firebase";
 import { 
     Button,
     TextInput,
@@ -16,12 +17,25 @@ import Logo from "../../components/Logo";
 
 const CriarConta = (props) => {
 
+  const [isLoading, setIsloading] = useState(false)
+
   const loginState = useSelector(state => state.autenticacaoReducer)
   const dispatch = useDispatch();
 
-  const _cadastraUsuario = () => {
-    const { nome, email, senha } = loginState 
-    cadastraUsuario({ nome, email, senha });
+  const _cadastraUsuario = async() => {
+    try {
+      setIsloading(true)
+      const { nome, email, senha } = loginState;
+      await firebase.auth().createUserWithEmailAndPassword(email, senha)
+      .then((user) => console.tron.log("user",user))
+      .catch((error) => console.tron.log("eror",error))
+    } catch (error) {
+      console.tron.log("error", error)
+    } finally {
+      setIsloading(false)
+    }
+
+    // cadastraUsuario({ nome, email, senha });
     // props.navigation.navigate('App');
   };
 
@@ -54,12 +68,14 @@ const CriarConta = (props) => {
           secureTextEntry
           mode={"outlined"}
           style={styles.field}
-          />          
+          />
+          <Text>{loginState.erroCadastro}</Text>       
         <Button 
           mode="contained"
           loading={false}
           style={styles.field}
-          onPress={_cadastraUsuario}>
+          onPress={_cadastraUsuario}
+          loading={isLoading}>
           Cadastrar
         </Button>
         <Subheading style={{...styles.esqueceuSenha,...styles.field}}>
@@ -75,7 +91,7 @@ const CriarConta = (props) => {
         </TouchableHighlight>
         <Text style={{...styles.footerText, ...styles.field}}>@2020</Text>
       </View>
-      <Spinner visible={true}/>
+      <Spinner visible={false}/>
     </View>
   )
 }

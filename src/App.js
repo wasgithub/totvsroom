@@ -7,20 +7,22 @@ import ReduxThunk from "redux-thunk";
 
 import rootReducer from './store/reducers'
 import Router from "./routes";
-import { paperTheme } from "./styles"
-import inicializaFirebase from "./config/Firebase"
+import { paperTheme } from "./styles";
+import inicializaFirebase from "./config/Firebase";
+import ReactotronConfig from './config/ReactotronConfig'
 
-const store = createStore(rootReducer, {}, applyMiddleware(ReduxThunk))
+// const store = createStore(rootReducer, {}, applyMiddleware(ReduxThunk))
 
 
 const App = () => {
 
   useEffect(() => {
     inicializaFirebase();
+    ReactotronConfig();
   },[])
 
   return (  
-    <StoreProvider store={store}>
+    <StoreProvider store={createStore(rootReducer, {}, applyMiddleware(ReduxThunk))}>
       <PaperProvider theme={paperTheme}>
         <Router />
       </PaperProvider>
