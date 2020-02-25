@@ -2,14 +2,15 @@
 import React, { useEffect } from 'react';
 import { Provider as PaperProvider } from 'react-native-paper';
 import { Provider as StoreProvider } from 'react-redux';
-import { createStore } from 'redux'
-import rootReducer from './store/reducers'
+import { createStore, applyMiddleware } from 'redux'
+import ReduxThunk from "redux-thunk";
 
+import rootReducer from './store/reducers'
 import Router from "./routes";
 import { paperTheme } from "./styles"
 import inicializaFirebase from "./config/Firebase"
 
-const store = createStore(rootReducer)
+const store = createStore(rootReducer, {}, applyMiddleware(ReduxThunk))
 
 
 const App = () => {
@@ -18,7 +19,7 @@ const App = () => {
     inicializaFirebase();
   },[])
 
-  return (
+  return (  
     <StoreProvider store={store}>
       <PaperProvider theme={paperTheme}>
         <Router />

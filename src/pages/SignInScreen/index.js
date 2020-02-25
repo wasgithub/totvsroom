@@ -1,7 +1,9 @@
-import React from "react";
-import { View, StyleSheet, Text } from "react-native";
+import React, { useState, useEffect } from "react";
+import  WasButton  from 'was-button';
+import { View, StyleSheet, Text, TouchableHighlight } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 import colors from "../../styles/colors"
+import Spinner from '../../components/spinner'
 
 import { modificaEmail, modificaSenha } from "../../store/actions/AutenticacaoAction"
 // import AsyncStorage from '@react-native-community/async-storage';
@@ -18,9 +20,10 @@ const SignInScreen = ({...props}) => {
 
   const loginState = useSelector(state => state.autenticacaoReducer)
   const dispatch = useDispatch();
+  const [loading, setLoading] = useState(false)
 
   const _signInAsync = () => {
-    storeData();
+    storeData()
     props.navigation.navigate('App');
   };
 
@@ -67,11 +70,16 @@ const SignInScreen = ({...props}) => {
         <Text></Text>
       </View>
       <View style={styles.footer}>
-        <Subheading style={{...styles.esqueceuSenha,...styles.field}}>
-            Criar Conta
-        </Subheading>
+        <TouchableHighlight onPress={() => props.navigation.navigate("CriarConta")}>
+          <Subheading style={{...styles.esqueceuSenha,...styles.field}}>
+              Criar Conta
+          </Subheading>
+        </TouchableHighlight>
         <Text style={{...styles.footerText, ...styles.field}}>@2020</Text>
       </View>
+      <Spinner 
+        visible={loading} 
+        />
     </View>
   );
 }

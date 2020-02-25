@@ -1,3 +1,3 @@
-import { modificaEmail } from "./AutenticacaoAction"
+import { modificaEmail, modificaNome } from "./AutenticacaoAction"
 
-export { modificaEmail };
+export { modificaEmail, modificaNome };
