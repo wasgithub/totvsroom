@@ -17,6 +17,8 @@ import Logo from "../../components/Logo";
 
 const CriarConta = (props) => {
 
+  const { navigation } = props
+
   const [isLoading, setIsloading] = useState(false)
   const [errorMsg, setErrorMsg] = useState("")
 
@@ -27,7 +29,7 @@ const CriarConta = (props) => {
       setIsloading(true)
       const { nome, email, senha } = loginState;
       await firebase.auth().createUserWithEmailAndPassword(email, senha)
-      .then((user) => console.tron.log("user",user))
+      .then((user) => navigation.navigate("BemVindo"))
       .catch((error) => setErrorMsg(error.message))
       .finally(() => setIsloading(false))
 

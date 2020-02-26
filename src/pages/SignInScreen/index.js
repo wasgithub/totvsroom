@@ -101,7 +101,8 @@ styles = StyleSheet.create({
   containerLogo: {
     flex: 2,
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
+    minHeight: 400
   },
   field: {
     marginTop: 16

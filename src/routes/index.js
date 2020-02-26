@@ -5,6 +5,7 @@ import HomeScreen from "../pages/HomeScreen";
 import SignInScreen from "../pages/SignInScreen";
 import AuthLoadingScreen from "../pages/LoadingScreen";
 import CriarConta from "../pages/CriarConta"
+import BemVindo from "../pages/BemVindo"
 
 // Implementation of HomeScreen, OtherScreen, SignInScreen, AuthLoadingScreen
 // goes here.
@@ -17,7 +18,9 @@ const AuthStack = createStackNavigator({
       headerShown: false
     }
   },
-  CriarConta });
+  CriarConta,
+  BemVindo
+});
 const inicialStack = createSwitchNavigator(
     { 
         AuthLoadingScreen: AuthLoadingScreen,
@@ -30,6 +33,7 @@ const Router = createAppContainer(
       AuthLoading: inicialStack,
       App: AppStack,
       Auth: AuthStack,
+      BemVindo
     },
     {
       initialRouteName: 'AuthLoading',
