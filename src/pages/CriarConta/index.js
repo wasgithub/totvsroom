@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { View, StyleSheet, Text, TouchableHighlight } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 import firebase from "firebase";
+import b64 from 'base-64';
 import { 
     Button,
     TextInput,
@@ -26,10 +27,20 @@ const CriarConta = (props) => {
   const dispatch = useDispatch();
 
   const _cadastraUsuario = async() => {
-      setIsloading(true)
-      const { nome, email, senha } = loginState;
-      await firebase.auth().createUserWithEmailAndPassword(email, senha)
-      .then((user) => navigation.navigate("BemVindo"))
+    const { nome, email, senha } = loginState;
+    setIsloading(true)
+    await firebase.auth().createUserWithEmailAndPassword(email, senha)
+      .then((user) => {
+        let emailB64 = b64.encode(email);
+        firebase.database()
+          .ref(`contatos/${emailB64}`)
+          .push({nome})
+          .then(value => navigation.navigate("BemVindo"))
+          .catch(error => console.tron.log("firebaseerror: ",error))
+
+
+        
+      })
       .catch((error) => setErrorMsg(error.message))
       .finally(() => setIsloading(false))
 
